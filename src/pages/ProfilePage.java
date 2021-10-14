@@ -68,7 +68,7 @@ public class ProfilePage extends BasicPage {
 	}
 //nađi bolji xpath, ne radi
 	public WebElement getSaveBtn() {
-		return driver.findElement(By.xpath("//*[@class= 'col-lg-12 col-md-12 col-sm-12 col-lg-12 align--right']//*[@name= 'btn_submit']"));
+		return driver.findElement(By.xpath("//*[@id='profileInfoFrm']/div[5]/div/fieldset/input"));
 	}
 	
 
@@ -105,6 +105,8 @@ public class ProfilePage extends BasicPage {
 		js.executeScript("arguments[0].click();", this.getRemove());
 	}
 
+	
+	
 	public void setInfoChange(String firstName, String lastName, String address, String phoneNumber,
 			String zipCode, String country, String state, String city) throws InterruptedException {
 		this.getFirstName().clear();
@@ -121,11 +123,12 @@ public class ProfilePage extends BasicPage {
 		this.selectState().selectByVisibleText(state);
 		this.selectCity().selectByVisibleText(city);
 		Thread.sleep(2000);
-		scrollToElement (driver, this.getSaveBtn());
-		js.executeScript("arguments[0].click();", this.getSaveBtn());
+		WebElement element = driver.findElement(By.name("user_zip"));
+		//scrollToElement (driver, this.getSaveBtn());
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		
-		//this.getSaveBtn();
-		//this.getSaveBtn().click();
+		
+		this.getSaveBtn().click();
 	}
 	public static void scrollToElement(WebDriver driver, WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
