@@ -20,7 +20,7 @@ public class LocationPopupPage extends BasicPage {
 	}
 
 	public WebElement getCloseBtn() {
-		return driver.findElement(By.xpath("//*[contains(@class, 'close-btn-white')]"));
+		return driver.findElement(By.cssSelector("#location-popup > div > div > div > div > a"));
 	}
 
 	public WebElement getKeyword() {
@@ -52,6 +52,10 @@ public class LocationPopupPage extends BasicPage {
 		js.executeScript("arguments[0].value=arguments[1]", this.getLocationInput(), dataValue);
 
 		js.executeScript("arguments[0].click();", this.getSubmit());
+	}
+
+	public void closeDialog() {
 		this.getCloseBtn().click();
+		//js.executeScript("arguments[0].click();", this.getCloseBtn());
 	}
 }

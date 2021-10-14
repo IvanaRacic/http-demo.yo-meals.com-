@@ -23,9 +23,9 @@ public class ProfilePage extends BasicPage {
 		return driver.findElement(By.name("user_last_name"));
 	}
 
-	public WebElement getEmail() {
-		return driver.findElement(By.name("user_email"));
-	}
+	//public WebElement getEmail() {
+		//return driver.findElement(By.name("user_email"));
+	//}
 
 	public WebElement getAddress() {
 		return driver.findElement(By.name("user_address"));
@@ -59,17 +59,18 @@ public class ProfilePage extends BasicPage {
 		Select select = new Select(city);
 		return select;
 	}
-
+//nađi bolji xpath, ne radi
 	public WebElement getSaveBtn() {
-		return driver.findElement(By.xpath(("//*[@type='submit'][1]")));
+		return driver.findElement(By.xpath("//*[@id='profileInfoFrm']/div[5]/div/fieldset/input"));
 	}
+	
 
 	public WebElement getImg() {
 		return driver.findElement(By.xpath((("//*[@class='avatar']"))));
 	}
 
 	public WebElement getUpload() {
-		return driver.findElement(By.xpath("//*[@title='Upload']"));
+		return driver.findElement(By.xpath("//*[@title='Uplaod']"));
 	}
 
 	public WebElement getRemove() {
@@ -92,22 +93,18 @@ public class ProfilePage extends BasicPage {
 		js.executeScript("arguments[0].click();", this.getRemove());
 	}
 
-	public void setInfoChange(String firstName, String lastName, String email, String address, String phoneNumber,
+	public void setInfoChange(String firstName, String lastName, String address, String phoneNumber,
 			String zipCode, String country, String state, String city) {
 		this.getFirstName().clear();
 		this.getFirstName().sendKeys(firstName);
 		this.getLastName().clear();
 		this.getLastName().sendKeys(lastName);
-		this.getEmail().clear();
-		this.getEmail().sendKeys(email);
 		this.getAddress().clear();
 		this.getAddress().sendKeys(address);
 		this.getPhoneNumber().clear();
 		this.getPhoneNumber().sendKeys(phoneNumber);
 		this.getZipCode().clear();
 		this.getZipCode().sendKeys(zipCode);
-		// ako ti ne bude radio select, vjerovatno je jer targetira id, ili index, a ne
-		// text, pa promijeni visibile by
 		this.selectCountry().selectByVisibleText(country);
 		this.selectState().selectByVisibleText(state);
 		this.selectCity().selectByVisibleText(city);
