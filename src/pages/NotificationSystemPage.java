@@ -8,12 +8,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NotificationSystemPage extends BasicPage {
-	public NotificationSystemPage(WebDriver driver, JavascriptExecutor js, WebDriverWait waiter) {
-		this.driver = driver;
-		this.js = js;
-		this.waiter = new WebDriverWait(driver, 20);
-	}
+	public NotificationSystemPage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
+		super(driver, waiter, js);
 
+	}
+//Elements
 	public WebElement getMessage() {
 		return driver.findElement(By.xpath("//*[contains(@class, 'alert--success') or "
 				+ "contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
