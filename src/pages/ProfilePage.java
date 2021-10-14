@@ -1,18 +1,25 @@
 package pages;
 
+import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.sun.glass.ui.Robot;
 
 public class ProfilePage extends BasicPage {
 	public ProfilePage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
 		super(driver, waiter, js);
 
 	}
-
+	
+	 Actions action = new Actions(driver);
+	
 	// Elements
 
 	public WebElement getFirstName() {
@@ -61,7 +68,7 @@ public class ProfilePage extends BasicPage {
 	}
 //nađi bolji xpath, ne radi
 	public WebElement getSaveBtn() {
-		return driver.findElement(By.xpath("//*[@id='profileInfoFrm']/div[5]/div/fieldset/input"));
+		return driver.findElement(By.xpath("//*[@class= 'col-lg-12 col-md-12 col-sm-12 col-lg-12 align--right']//*[@name= 'btn_submit']"));
 	}
 	
 
@@ -81,9 +88,14 @@ public class ProfilePage extends BasicPage {
 		return driver.findElement(By.xpath("//input[@type='file']"));
 	}
 
+	
+	//public WebElement getUploadugme () {
+		//return this.driver.findElement(By.xpath("//*[@class='hover-elemnts']/a[1]/i"));
+	//}
 	// Methods
 
 	public void uploadPhoto(String img) {
+		action.moveToElement(this.getImg());
 		js.executeScript("arguments[0].click();", this.getUpload());
 		this.getUploadElement().sendKeys(img);
 
@@ -94,7 +106,7 @@ public class ProfilePage extends BasicPage {
 	}
 
 	public void setInfoChange(String firstName, String lastName, String address, String phoneNumber,
-			String zipCode, String country, String state, String city) {
+			String zipCode, String country, String state, String city) throws InterruptedException {
 		this.getFirstName().clear();
 		this.getFirstName().sendKeys(firstName);
 		this.getLastName().clear();
@@ -108,7 +120,15 @@ public class ProfilePage extends BasicPage {
 		this.selectCountry().selectByVisibleText(country);
 		this.selectState().selectByVisibleText(state);
 		this.selectCity().selectByVisibleText(city);
-		this.getSaveBtn().click();
+		Thread.sleep(2000);
+		scrollToElement (driver, this.getSaveBtn());
+		js.executeScript("arguments[0].click();", this.getSaveBtn());
+		
+		//this.getSaveBtn();
+		//this.getSaveBtn().click();
 	}
-
+	public static void scrollToElement(WebDriver driver, WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView();", element);
+	}
 }
