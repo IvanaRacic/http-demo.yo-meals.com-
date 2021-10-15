@@ -16,7 +16,9 @@ public class MealItemTest extends BasicTest{
 		String quantity = "2";
 		this.mealPage.addToCart(quantity);
 		
-		//String message = "The Following Errors Occurred: Please Select Location";
+		String message = "The Following Errors Occurred: Please Select Location";
+		
+		Assert.assertEquals(true, message.contains("Errors"));
 			//	+ "Please Select Location";
 		  //(this.notificationSystemPage.getMessageText(), firstMessage);
 		  

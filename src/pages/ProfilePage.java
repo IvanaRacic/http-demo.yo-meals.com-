@@ -66,7 +66,7 @@ public class ProfilePage extends BasicPage {
 		Select select = new Select(city);
 		return select;
 	}
-//nađi bolji xpath, ne radi
+//nađi bolji xpath
 	public WebElement getSaveBtn() {
 		return driver.findElement(By.xpath("//*[@id='profileInfoFrm']/div[5]/div/fieldset/input"));
 	}
@@ -124,7 +124,7 @@ public class ProfilePage extends BasicPage {
 		this.selectCity().selectByVisibleText(city);
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.name("user_zip"));
-		//scrollToElement (driver, this.getSaveBtn());
+		
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		
 		

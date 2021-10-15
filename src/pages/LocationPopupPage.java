@@ -34,9 +34,9 @@ public class LocationPopupPage extends BasicPage {
 	public WebElement getLocationInput() {
 		return driver.findElement(By.xpath("//*[@id='location_id']"));
 	}
-
+//nađi bolji
 	public WebElement getSubmit() {
-		return driver.findElement(By.xpath("//*[@name='btn_submit']"));
+		return driver.findElement(By.xpath("//*[@id='frm_fat_id_frmSetLocation']/span/input"));
 	}
 
 	// Methods
@@ -50,9 +50,9 @@ public class LocationPopupPage extends BasicPage {
 		Thread.sleep(2000);
 		this.getLocationItem(locationName).click();
 		String dataValue = this.getLocationItem(locationName).getAttribute("data-value");
-		js.executeScript("arguments[0].value=arguments[1]", this.getLocationInput(), dataValue);
+		//js.executeScript("arguments[0].value=arguments[1]", this.getLocationInput(), dataValue);
 
-		js.executeScript("arguments[0].click();", this.getSubmit());
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.getSubmit());
 	}
 
 	public void closeDialog() {
