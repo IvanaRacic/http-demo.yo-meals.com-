@@ -95,8 +95,15 @@ public class ProfilePage extends BasicPage {
 	// Methods
 
 	public void uploadPhoto(String img) {
+		
+		WebElement UploadImg = this.getUploadElement();
+		  UploadImg.click();
+		  WebElement frame =driver.switchTo().activeElement();
+		  frame.sendKeys(img);
+		  
+		  
 		action.moveToElement(this.getImg());
-		js.executeScript("arguments[0].click();", this.getUpload());
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.getUpload());
 		this.getUploadElement().sendKeys(img);
 
 	}

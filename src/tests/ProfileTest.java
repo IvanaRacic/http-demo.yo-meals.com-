@@ -25,7 +25,7 @@ public class ProfileTest extends BasicTest{
 	
 	@Test
 	
-	public void Login () throws InterruptedException, IOException {
+	public void editProfile () throws InterruptedException, IOException {
 		driver.get(this.url + "/guest-user/login-form");
 		Thread.sleep(2000);
 		this.locationPopupPage.closeDialog();
@@ -56,21 +56,26 @@ public class ProfileTest extends BasicTest{
 		String messageLogout = "Logout Successfull!";
 		
 		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageLogout);
+	}
+		@Test
 		
-		//driver.get(this.url + "/guest-user/login-form");
-		//Thread.sleep(2000);
-		//this.locationPopupPage.closeDialog();
-		//Thread.sleep(2000);
-		//this.loginPage.Login(email, password);
-		//this.notificationSystemPage.getMessageText();
+		public void changeProfileImage() throws IOException, InterruptedException {
+		
+		driver.get(this.url + "/guest-user/login-form");
+		Thread.sleep(2000);
+		this.locationPopupPage.closeDialog();
+		Thread.sleep(2000);
+		this.loginPage.Login(email, password);
+		this.notificationSystemPage.getMessageText();
 		String messageSecond = "Login Successfull";
 		
 		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageSecond);
 		driver.get(this.url + "/member/profile");
-		String imgPath = new File("Img.jpg").getCanonicalPath();
+		//String imgPath = new File("Img.jpg").getCanonicalPath();
 		
-		this.profilePage.uploadPhoto(imgPath);
-		
+		//this.profilePage.uploadPhoto(imgPath);
+		String img = "file:///C:/Users/Iva/Desktop/zavrsni%20projekat/http-demo.yo-meals.com-/img/Img.jpg";
+		this.profilePage.uploadPhoto(img);
 	}
 	
 	
