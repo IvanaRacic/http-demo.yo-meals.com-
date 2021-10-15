@@ -16,7 +16,7 @@ public class LocationPopupPage extends BasicPage {
 	// Elements
 
 	public WebElement getLocation() {
-		return driver.findElement(By.className("location-selector"));
+		return driver.findElement(By.className("ion-ios-location"));
 	}
 
 	public WebElement getCloseBtn() {
