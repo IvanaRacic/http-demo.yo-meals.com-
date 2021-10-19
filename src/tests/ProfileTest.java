@@ -18,14 +18,11 @@ import pages.LoginPage;
 import pages.NotificationSystemPage;
 import pages.ProfilePage;
 
-public class ProfileTest extends BasicTest{
+public class ProfileTest extends BasicTest {
 
-	
-	
-	
 	@Test
-	
-	public void editProfile () throws InterruptedException, IOException {
+
+	public void editProfile() throws InterruptedException, IOException {
 		driver.get(this.url + "/guest-user/login-form");
 		Thread.sleep(2000);
 		this.locationPopupPage.closeDialog();
@@ -33,34 +30,37 @@ public class ProfileTest extends BasicTest{
 		this.loginPage.Login(email, password);
 		this.notificationSystemPage.getMessageText();
 		String message = "Login Successfull";
-		
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), message);
-		
+
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), message, "Error: Unexpected Login Message");
+
 		driver.get(this.url + "/member/profile");
 		String firstName = "Johnny";
 		String lastName = "Depp";
-		
+
 		String address = "ulica Desanke Maksimovic";
 		String phoneNumber = "087456123";
 		String zipCode = "52000";
 		String country = "United States";
 		String state = "Alaska";
 		String city = "Nome";
-		
+
 		String messageSetUp = "Setup Successful";
 		this.profilePage.setInfoChange(firstName, lastName, address, phoneNumber, zipCode, country, state, city);
-		
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageSetUp);
-		
+
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageSetUp,
+				"Error: Unexpected SetUp Message");
+
 		this.authPage.logout();
 		String messageLogout = "Logout Successfull!";
-		
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageLogout);
+
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageLogout,
+				"Error: Unexpected Logout Message");
 	}
-		@Test
-		
-		public void changeProfileImage() throws IOException, InterruptedException {
-		
+
+	@Test
+
+	public void changeProfileImage() throws IOException, InterruptedException {
+
 		driver.get(this.url + "/guest-user/login-form");
 		Thread.sleep(2000);
 		this.locationPopupPage.closeDialog();
@@ -68,16 +68,29 @@ public class ProfileTest extends BasicTest{
 		this.loginPage.Login(email, password);
 		this.notificationSystemPage.getMessageText();
 		String messageSecond = "Login Successfull";
-		
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageSecond);
+
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageSecond,
+				"Error: Unexpected Login Message");
 		driver.get(this.url + "/member/profile");
-		//String imgPath = new File("Img.jpg").getCanonicalPath();
-		
-		//this.profilePage.uploadPhoto(imgPath);
-		String img = "file:///C:/Users/Iva/Desktop/zavrsni%20projekat/http-demo.yo-meals.com-/img/Img.jpg";
+
+		String img = new File("img/Img.jpg").getCanonicalPath();
+		Thread.sleep(3000);
+		this.profilePage.clickUpload();
 		this.profilePage.uploadPhoto(img);
+
+		String messagePhotoUploaded = "Profile Image Uploaded Successfully";
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messagePhotoUploaded,
+				"Error: Unexpected Photo Upload Message");
+
+		Thread.sleep(3000);
+		this.profilePage.removePhoto();
+		String removedPhoto = "Profile Image Deleted Successfully";
+		Thread.sleep(3000);
+		this.authPage.logout();
+		String messageLogout = "Logout Successfull!";
+
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageLogout,
+				"Error: Unexpected Logout Message");
 	}
-	
-	
-	
+
 }

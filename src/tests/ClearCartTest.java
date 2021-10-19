@@ -17,7 +17,7 @@ public class ClearCartTest extends BasicTest{
 	
 	@Test
 	
-	public void clearAll() throws InterruptedException, IOException {
+	public void clearCart() throws InterruptedException, IOException {
 		driver.get(this.url + "/meals");
 		String locationName = "City Center - Albany";
 		this.locationPopupPage.setLocation(locationName);
@@ -38,14 +38,14 @@ public class ClearCartTest extends BasicTest{
 			String quantity = "2";
 			this.mealPage.addToCart(quantity);
 			
-			sa.assertEquals(this.notificationSystemPage.getMessageText(), message);
+			sa.assertEquals(this.notificationSystemPage.getMessageText(), message, "Error: Unexpected Add To Cart Message");
 			
 			
 			}
 		String messageClearCart ="All meals removed from Cart successfully";
 		this.cartSummaryPage.clearAll();
 		
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageClearCart);
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageClearCart, "Error: Unexpected Remove From Cart Message");
 		
 	
 	}

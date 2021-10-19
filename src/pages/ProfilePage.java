@@ -18,7 +18,7 @@ public class ProfilePage extends BasicPage {
 
 	}
 	
-	 Actions action = new Actions(driver);
+	 Actions actionProvider;
 	
 	// Elements
 
@@ -73,11 +73,15 @@ public class ProfilePage extends BasicPage {
 	
 
 	public WebElement getImg() {
-		return driver.findElement(By.xpath((("//*[@class='avatar']"))));
+		return driver.findElement(By.xpath("//*[@class='avatar']"));
 	}
 
+	//public WebElement getUpload() {
+		//return driver.findElement(By.xpath("//*[@title='Uplaod']"));
+	//}
+	
 	public WebElement getUpload() {
-		return driver.findElement(By.xpath("//*[@title='Uplaod']"));
+		return driver.findElement(By.xpath("//a[contains(@class, 'upload')]"));
 	}
 
 	public WebElement getRemove() {
@@ -88,28 +92,52 @@ public class ProfilePage extends BasicPage {
 		return driver.findElement(By.xpath("//input[@type='file']"));
 	}
 
+	public WebElement getImageArea() {
+		return driver.findElement(By.className("page-data"));
+	}
 	
-	//public WebElement getUploadugme () {
-		//return this.driver.findElement(By.xpath("//*[@class='hover-elemnts']/a[1]/i"));
-	//}
+	
 	// Methods
 
-	public void uploadPhoto(String img) {
+	
 		
-		WebElement UploadImg = this.getUploadElement();
-		  UploadImg.click();
-		  WebElement frame =driver.switchTo().activeElement();
-		  frame.sendKeys(img);
-		  
-		  
-		action.moveToElement(this.getImg());
+	public void clickUpload() {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.getUpload());
-		this.getUploadElement().sendKeys(img);
-
 	}
+		
+		public void uploadPhoto(String img) {
+			WebElement file = this.driver.findElement(By.xpath("//input[@type='file']"));
+			file.sendKeys(img);
+		}
+		
+		//public void uploadImage(String img) throws InterruptedException {
+			//((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.getUpload());
+			//Thread.sleep(3000);
+			//WebElement input = driver.findElement(By.xpath("//*[@id='form-upload']/input"));
+			//input.sendKeys(img);
+		//}
+		
+		//actionProvider.moveToElement(this.getImageArea()).build().perform();
+		
+		//public void clickOnUploadAvatar() {
+			//actions.moveToElement(driver.findElement(By.xpath("//*[@class='avatar']"))).perform();
+			//getUploadButton().click();
+		//}
+		
+		//WebElement UploadImg = this.getUploadElement();
+		  //UploadImg.click();
+		  //WebElement frame =driver.switchTo().activeElement();
+		  //frame.sendKeys(img);
+		  
+		  
+		//action.moveToElement(this.getImg());
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.getUpload());
+		//this.getUploadElement().sendKeys(img);
+
+	//}
 
 	public void removePhoto() {
-		js.executeScript("arguments[0].click();", this.getRemove());
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.getRemove());
 	}
 
 	
@@ -127,6 +155,7 @@ public class ProfilePage extends BasicPage {
 		this.getZipCode().clear();
 		this.getZipCode().sendKeys(zipCode);
 		this.selectCountry().selectByVisibleText(country);
+		Thread.sleep(3000);
 		this.selectState().selectByVisibleText(state);
 		this.selectCity().selectByVisibleText(city);
 		Thread.sleep(2000);

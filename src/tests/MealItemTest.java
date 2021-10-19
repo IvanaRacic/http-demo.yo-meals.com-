@@ -8,7 +8,7 @@ public class MealItemTest extends BasicTest{
 	
 	@Test
 	
-	public void addMeal () throws InterruptedException {
+	public void addMealToCart () throws InterruptedException {
 		driver.get(this.url + "/meal/lobster-shrimp-chicken-quesadilla-combo");
 		Thread.sleep(2000);
 		this.locationPopupPage.closeDialog();
@@ -18,8 +18,8 @@ public class MealItemTest extends BasicTest{
 		
 		String message = "The Following Errors Occurred: Please Select Location";
 		
-		Assert.assertEquals(true, message.contains("The Following Errors Occurred"));
-		Assert.assertEquals(true, message.contains("Please Select Location"));
+		Assert.assertEquals(true, message.contains("The Following Errors Occurred"), "Error: Unexpected Location Message");
+		Assert.assertEquals(true, message.contains("Please Select Location"), "Error: Unexpected Location Message");
 		
 		Thread.sleep(4000);
 		
@@ -31,7 +31,7 @@ public class MealItemTest extends BasicTest{
 		
 		this.mealPage.addToCart(quantity);
 		
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageMealAdded);
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageMealAdded, "Error: Unexpected Cart Message");
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class MealItemTest extends BasicTest{
 		this.mealPage.addToFavorites();
 		
 		String messageLogin = "Please login first!";
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageLogin);
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageLogin, "Error: Unexpected Login Message");
 		
 		driver.get(url + "/guest-user/login-form");
 		this.loginPage.Login(email, password);
@@ -52,7 +52,7 @@ public class MealItemTest extends BasicTest{
 		Thread.sleep(2000);
 		this.mealPage.addToFavorites();
 		String messageaddFavorite = "Product has been added to your favorites.";
-		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageaddFavorite);
+		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageaddFavorite, "Error: Unexpected Favorite Message");
 		
 	}
 }

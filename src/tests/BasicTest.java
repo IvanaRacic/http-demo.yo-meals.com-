@@ -42,46 +42,38 @@ public abstract class BasicTest {
 	protected AuthPage authPage;
 	protected CartSummaryPage cartSummaryPage;
 	protected MealPage mealPage;
-	
-	
-	
-	
 
-
-	//Actions action = new Actions(driver);
-	
 	@BeforeMethod
-	
-	public void beforeMethod () {
+
+	public void beforeMethod() {
 		System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get("http://demo.yo-meals.com");
-		profilePage = new ProfilePage (driver, waiter, js);
-		loginPage = new LoginPage (driver, waiter, js);
-		notificationSystemPage = new NotificationSystemPage (driver, waiter, js);
-		locationPopupPage = new LocationPopupPage (driver, waiter, js);
-		authPage = new AuthPage (driver, waiter, js);
-		cartSummaryPage = new CartSummaryPage (driver, waiter, js);
-		mealPage = new MealPage (driver, waiter, js);
-		
+		profilePage = new ProfilePage(driver, waiter, js);
+		loginPage = new LoginPage(driver, waiter, js);
+		notificationSystemPage = new NotificationSystemPage(driver, waiter, js);
+		locationPopupPage = new LocationPopupPage(driver, waiter, js);
+		authPage = new AuthPage(driver, waiter, js);
+		cartSummaryPage = new CartSummaryPage(driver, waiter, js);
+		mealPage = new MealPage(driver, waiter, js);
+
 	}
-	
+
 	@AfterMethod
-	
-	public void afterMethod () throws IOException {
-		TakesScreenshot scrShot =((TakesScreenshot)driver);
-		File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-        Instant instant = Instant.now().truncatedTo( ChronoUnit.SECONDS );
+
+	public void afterMethod() throws IOException {
+		TakesScreenshot scrShot = ((TakesScreenshot) driver);
+		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+		Instant instant = Instant.now().truncatedTo(ChronoUnit.SECONDS);
 		String fileName = instant.toString().replace(":", "-");
-		File DestFile=new File("screenshots/" + fileName + ".png");
+		File DestFile = new File("screenshots/" + fileName + ".png");
 		FileUtils.copyFile(SrcFile, DestFile);
-		
+
 		driver.quit();
-		
-	
+
 	}
-	
+
 }
