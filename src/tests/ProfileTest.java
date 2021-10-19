@@ -20,7 +20,7 @@ import pages.ProfilePage;
 
 public class ProfileTest extends BasicTest {
 
-	@Test
+	@Test (priority = 1)
 
 	public void editProfile() throws InterruptedException, IOException {
 		driver.get(this.url + "/guest-user/login-form");
@@ -57,7 +57,7 @@ public class ProfileTest extends BasicTest {
 				"Error: Unexpected Logout Message");
 	}
 
-	@Test
+	@Test (priority = 4)
 
 	public void changeProfileImage() throws IOException, InterruptedException {
 

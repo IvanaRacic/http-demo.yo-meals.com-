@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class MealItemTest extends BasicTest{
 
 	
-	@Test
+	@Test (priority = 1)
 	
 	public void addMealToCart () throws InterruptedException {
 		driver.get(this.url + "/meal/lobster-shrimp-chicken-quesadilla-combo");
@@ -34,7 +34,7 @@ public class MealItemTest extends BasicTest{
 		Assert.assertEquals(this.notificationSystemPage.getMessageText(), messageMealAdded, "Error: Unexpected Cart Message");
 	}
 	
-	@Test
+	@Test (priority = 3)
 	
 	public void addMealToFavorite () throws InterruptedException {
 		driver.get(this.url + "/meal/lobster-shrimp-chicken-quesadilla-combo");

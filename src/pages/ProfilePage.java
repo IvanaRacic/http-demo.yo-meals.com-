@@ -18,7 +18,7 @@ public class ProfilePage extends BasicPage {
 
 	}
 	
-	 Actions actionProvider;
+
 	
 	// Elements
 
@@ -72,9 +72,9 @@ public class ProfilePage extends BasicPage {
 	}
 	
 
-	public WebElement getImg() {
-		return driver.findElement(By.xpath("//*[@class='avatar']"));
-	}
+	//public WebElement getImg() {
+		//return driver.findElement(By.xpath("//*[@class='avatar']"));
+	//}
 
 	//public WebElement getUpload() {
 		//return driver.findElement(By.xpath("//*[@title='Uplaod']"));
@@ -92,9 +92,9 @@ public class ProfilePage extends BasicPage {
 		return driver.findElement(By.xpath("//input[@type='file']"));
 	}
 
-	public WebElement getImageArea() {
-		return driver.findElement(By.className("page-data"));
-	}
+	//public WebElement getImageArea() {
+		//return driver.findElement(By.className("page-data"));
+	//}
 	
 	
 	// Methods
